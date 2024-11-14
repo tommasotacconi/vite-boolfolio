@@ -1,20 +1,26 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import AppMain from './components/AppMain.vue';
+
+export default {
+	data() {
+		return {
+
+		}
+	},
+	components: {
+		AppMain,
+	},
+}
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+	<AppMain />
+
 </template>
 
-<style scoped>
+<style lang="scss">
+@use 'bootstrap/scss/bootstrap.scss' as *;
+
 .logo {
   height: 6em;
   padding: 1.5em;
