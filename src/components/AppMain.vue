@@ -42,7 +42,7 @@ export default {
         <span>Completed projects: <span class="counter-pillow">{{ projectsList.length }}</span></span> <!-- counter for projects -->
       </div>
       <!-- Row di cols -->
-      <div class="row gx-3 mt-5">
+      <div class="row g-3 mt-5">
         <!-- Cols -->
         <div class="col-2 card-col" :class="{ 'offset-1': index % 5 === 0 }" v-for="(project, index) in projectsList" :key="index">
           <Card :cardProject="project"	/>
