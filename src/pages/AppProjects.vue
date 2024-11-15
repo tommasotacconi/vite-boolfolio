@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import Card from './Card.vue';
+import Card from '../components/Card.vue';
 
 export default {
 	name: 'AppMain',
@@ -34,6 +34,7 @@ export default {
 </script>
 
 <template>
+	<!-- Main -->
   <main class="">
 		<h1 class="text-center py-5">Projects</h1>
     <div class="card-container container-md">
