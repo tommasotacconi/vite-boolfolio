@@ -1,5 +1,7 @@
 <script>
-import AppMain from './components/AppMain.vue';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
+import { RouterView } from 'vue-router';
 
 export default {
 	data() {
@@ -8,14 +10,21 @@ export default {
 		}
 	},
 	components: {
-		AppMain,
+		AppHeader,
+		AppFooter
 	},
 }
 </script>
 
 <template>
-	<AppMain />
+	<!-- Header -->
+	<AppHeader />
 
+	<!-- Dinamic content with Router-link	 -->
+	<RouterView id="router-view"/>
+
+	<!-- Footer -->
+	<AppFooter />
 </template>
 
 <style lang="scss">
@@ -34,5 +43,4 @@ export default {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>
-
 <!-- final commit -->
