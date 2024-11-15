@@ -39,7 +39,7 @@ export default {
     <div class="card-container container-md">
       <!-- Contatori di card -->
       <div class="filter-counter-box row d-block p-4">
-        <span>Completed projects: <span class="counter-pillow">{{ projectsList.length }}</span></span> <!-- counter for projects -->
+        <div>Completed projects: <span class="counter-pillow"><span class="pillow-text">{{ projectsList.length }}</span></span></div> <!-- counter for projects -->
       </div>
       <!-- Row di cols -->
       <div class="row g-3 mt-5">
@@ -57,7 +57,12 @@ export default {
     padding: 3px 10px;
     margin-left: 5px;
     background-color: #ffae4b;
-    color: rgb(var(--bs-dark-rgb));
     border-radius: 15px;
+		
+    color: rgb(var(--bs-dark-rgb));
+
+		.pillow-text {
+			vertical-align: 5%;
+		}
   }
 </style>
