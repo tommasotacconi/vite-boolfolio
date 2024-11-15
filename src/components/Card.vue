@@ -25,10 +25,13 @@ export default {
     <img :src="getImagePath(`storage/${cardProject.img_url}`)" class="card-img-top" alt="card.name">
     <div class="card-body m-0 p-2">
       <h5 class="card-title playing-card">{{ cardProject.name }}</h5>
-      <p class="playing-card-archetipe">{{ cardProject.authors }}</p>
+      <p class="playing-card-archetipe"><span class="card-data">Authors</span>: {{ cardProject.authors }}</p>
     </div>
   </div>
 </template>
 
 <style scoped>
+.card-data {
+	color: #5081b3;
+}
 </style>
