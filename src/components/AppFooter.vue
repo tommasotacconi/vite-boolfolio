@@ -10,7 +10,7 @@ export default {
 
 <template>
 	<footer>
-		<p>Copyright &#169;	2024 Tommaso Tacconi.</p>
+		<p class="p-1">Copyright &#169;	2024 Tommaso Tacconi.</p>
 	</footer>
 </template>
 
