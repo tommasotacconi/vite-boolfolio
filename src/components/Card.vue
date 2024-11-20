@@ -49,7 +49,7 @@ export default {
 	position: relative;
 	overflow-y: hidden;
 
-	transition: height .5s, display 1s allow-discrete;
+	transition: height 1s;
 }
 
 .col-2.expanded > .card {
