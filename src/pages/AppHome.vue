@@ -20,5 +20,6 @@ h1 {
 	text-align: center;
 	line-height: 80vh;
 	vertical-align: middle;
+	color:lightsteelblue
 }
 </style>
