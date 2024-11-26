@@ -31,12 +31,12 @@ export default {
 		<div class="card-body m-0 p-2">
 			<h5 class="card-title playing-card">{{ cardProject.name }}</h5>
 			<Transition>
-				<p v-if="state.show" class="playing-card-archetipe"><span class="card-data">Authors</span>: {{ cardProject.authors }}</p>
+				<p v-if="state.show" class="authors"><span class="card-data">Authors</span>: {{ cardProject.authors }}</p>
 			</Transition>
 		</div>
 		<Transition>
 			<div class="button-wrapper" v-if="state.hovered">
-				<button class="btn btn-primary">Mostra</button>
+				<a class="btn btn-primary" @click="$router.push(`/projects/${cardProject.id}`)" >Mostra</a>
 			</div>
 		</Transition>
 	</div>
@@ -54,13 +54,18 @@ export default {
 
 .col-2.expanded > .card {
 	height: 330px;
+
+	.card-body {
+		display: flex;
+		justify-content: space-between;
+	}
 }
 
 .card-data {
 	color: #5081b3;
 }
 
-button {
+a {
 	background-color: #5082b3dd;
 	border-color: transparent;
 	color: #000;
