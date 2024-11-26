@@ -14,7 +14,7 @@ export default {
 	</footer>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 footer {
 	height: 400px;
 	background-color: rgb(0, 45, 167);
