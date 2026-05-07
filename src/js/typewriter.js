@@ -22,7 +22,7 @@ export default class TypewriterWithTags {
 
   static async createWithProcessing(element) {
     if (!Prism.languages.javascript) {
-      console.log('No javascript languages loaded from autoloader yet, fetching it');
+      // console.log('No javascript languages loaded from autoloader yet, fetching it');
       await new Promise((resolve) => {
         Prism.plugins.autoloader.loadLanguages(['javascript'], resolve);
       });
@@ -109,7 +109,7 @@ export default class TypewriterWithTags {
           if (startInd !== -1) {
             const endInd = txtCont.search(']]');
             const code = txtCont.substring(startInd + 2, endInd);
-            console.log(`Found code to interpret: '${code}'`);
+            // console.log(`Found code to interpret: '${code}'`);
 
             const output = eval?.(`"use strict";` + code);
             replacedTxtCont = txtCont.replace(`[[${code}]]`, output);
