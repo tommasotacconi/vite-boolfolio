@@ -2,6 +2,11 @@
 @use 'github-dark-prism.css';
 @use 'bootstrap/scss/bootstrap.scss' as bs;
 
+// Colors
+$wa-color: #25D366;
+$teleg-color: #0088cc;
+$link-color: #0000EE; 
+
 @keyframes bounce-in {
 	0% {
 		transform: scale(0);
