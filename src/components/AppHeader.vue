@@ -22,10 +22,10 @@
 						<router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
 					</li>
 					<li class="nav-item">
-						<router-link :to="{ name: 'projects' }" class="nav-link">Projects</router-link>
+						<router-link :to="{ name: 'projects' }" class="nav-link">Progetti</router-link>
 					</li>
 					<li class="nav-item">
-						<router-link :to="{ name: 'about' }" class="nav-link">About</router-link>
+						<router-link :to="{ name: 'about' }" class="nav-link">Chi sono</router-link>
 					</li>
 				</ul>
 			</div>
