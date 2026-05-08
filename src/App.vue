@@ -23,8 +23,8 @@
 			<AppHeader id="header" />
 		</header>
 		<div class="container">
-			<main>
-				<RouterView id="main-view" />
+			<main id="main-view">
+				<RouterView />
 			</main>
 		</div>
 	</div>
