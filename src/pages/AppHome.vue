@@ -70,24 +70,23 @@ Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inat
 </script>
 
 <template>
-	<div class="container">
-		<h1 class="text-center py-5">Introduzione</h1>
+	<h1 class="text-center py-5">Introduzione</h1>
 
-		<div class="code-wrapper">
-			<pre class="cod-ex-block">
+	<div class="code-wrapper">
+		<pre class="cod-ex-block">
 <code ref="codeBl" class="language-javascript typewriter"></code>
 			</pre>
 
-			<Transition name="bounce">
-				<div v-if="showInput" class="input-field">
-					<div class="form-floating">
-						<input id="name" class="form-control" v-model.trim="name" placeholder="inserisci nome" type="text"
-							@keypress.enter="handleConfirm">
-						<label for="name">Iserisci il tuo nome e avvia l'introduzione con 'invio'</label>
-					</div>
+		<Transition name="bounce">
+			<div v-if="showInput" class="input-field">
+				<div class="form-floating">
+					<input id="name" class="form-control" v-model.trim="name" placeholder="inserisci nome" type="text"
+						@keypress.enter="handleConfirm">
+					<label for="name">Nome</label>
+					<div class="form-text">Iserisci il tuo nome e avvia l'introduzione con 'invio'</div>
 				</div>
-			</Transition>
-		</div>
+			</div>
+		</Transition>
 	</div>
 </template>
 
@@ -102,14 +101,12 @@ Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inat
 	}
 
 	/* Utility */
-	.container {
-		padding: 0 20px;
-		margin: 0 auto;
-		max-width: 1150px;
-	}
-
 	.code-wrapper {
 		position: relative;
+
+		.form-text {
+			color: #8b949e;
+		}
 	}
 
 	.bounce-enter-active {
@@ -121,9 +118,7 @@ Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inat
 	}
 
 	.input-field {
-		width: 400px;
-		// outline: 3px solid white;
-		// border-radius: 5px;
+		width: min(85%, 350px);
 
 		position: absolute;
 		left: 50%;

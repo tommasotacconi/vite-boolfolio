@@ -22,9 +22,11 @@
 		<header>
 			<AppHeader id="header" />
 		</header>
-		<main>
-			<RouterView id="main-view" />
-		</main>
+		<div class="container">
+			<main>
+				<RouterView id="main-view" />
+			</main>
+		</div>
 	</div>
 
 	<!-- Not shown immediately -->
