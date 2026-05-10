@@ -17,11 +17,6 @@
 	}
 
 	export default {
-		data() {
-			return {
-
-			}
-		},
 		setup() {
 			return { contacts };
 		}
@@ -48,12 +43,6 @@
 <style lang="scss" scoped>
 	@use '../style/general.scss' as gen;
 
-	@mixin anchor-hover($icon, $color) {
-		&:hover:has(.bi-#{$icon}) .bi {
-			color: $color;
-		}
-	}
-
 	h1 {
 		text-align: center;
 		color: lightsteelblue
@@ -70,9 +59,13 @@
 			text-decoration: none;
 			color: #000;
 
-			@include anchor-hover(whatsapp, gen.$wa-color);
-			@include anchor-hover(telegram, gen.$teleg-color);
-			@include anchor-hover(envelope-at, gen.$link-color);
+			@each $icon-name, $color in (envelope-at gen.$link-color,
+				whatsapp gen.$wa-color,
+				telegram gen.$teleg-color) {
+				&:hover:has(.bi-#{$icon-name}) .bi {
+					color: $color;
+				}
+			}
 		}
 
 		i {
