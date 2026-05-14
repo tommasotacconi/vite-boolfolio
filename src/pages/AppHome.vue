@@ -1,17 +1,5 @@
 <script>
 	import typewriter from '../js/typewriter';
-	import thoughts from '../js/thoughts';
-
-	const getRandInt = (max) => Math.floor(Math.random() * (max + 1));
-	const currHour = 3;
-	let thought = '';
-	for (const [interval, { sentences }] of Object.entries(thoughts)) {
-		const [start, end] = interval.split('-');
-		if (currHour >= start && currHour < end) {
-			thought = sentences[getRandInt(sentences.length - 1)];
-			break;
-		}
-	}
 
 	export default {
 		data() {
@@ -20,6 +8,12 @@
 				gender: '',
 				loading: false,
 				showInput: true,
+				thought: {
+					lang: '',
+					text: '',
+					arrIndex: null,
+					timeRange: '',
+				},
 			}
 		},
 		methods: {
@@ -28,11 +22,12 @@
 
 				this.loading = true;
 				this.resetGender();
-				this.gender = 'female';
 
 				try {
 					if (this.gender) return;
-					const county = 'IT';
+					const supportedLocales = Object.keys(this.$i18n.messages);
+					const locale = navigator.language;
+					const [lang, country = null] = locale.split('-');
 
 					const res = await fetch(`https://gender-api.com/get?name=${this.name}&country=${country}&key=${import.meta.env.VITE_GENDER_API_KEY}`);
 					({ gender: this.gender = '', meaning: this.meaning } = await res.json());
@@ -45,36 +40,78 @@
 			},
 			resetGender() {
 				this.gender = '';
+			},
+			getThought() {
+				const getRandInt = (max) => Math.floor(Math.random() * (max + 1));
+				const thoughts = this.$i18n.tm('home.intro.message.thoughts')
+				const th = this.thought;
+				if (th.timeRange && th.arrIndex) th.text = thoughts[th.timeRange].sentences[th.arrIndex];
+				else {
+					for (const [interval, { sentences }] of Object.entries(thoughts)) {
+						const [start, end] = interval.split('-');
+						const currHour = new Date().getHours();
+						if (currHour >= start && currHour < end) {
+							th.arrIndex = getRandInt(sentences.length - 1);
+							th.text = sentences[th.arrIndex];
+							th.lang = this.$i18n.locale;
+							th.timeRange = interval;
+							break;
+						}
+					}
+				}
+
+			}
+		},
+		computed: {
+			welcomeWord() {
+				if (this.$i18n.locale === 'en') return 'welcome';
+
+				return 'benvenut' + (this.gender === 'female' ? 'a' : 'o');
+			},
+			intro() {
+				if (!this.gender) return;
+				const th = this.thought;
+				if (!th.text) this.getThought();
+				else if (th.lang !== this.$i18n.locale) {
+					th.lang = this.$i18n.locale;
+					this.getThought();
+				}
+				const isThoughtIncomplete = th.text.slice(-1) !== '.';
+
+				return [
+					'`' + this.$t('home.intro.message.greeting', {
+						name: this.name,
+						welcome: this.welcomeWord
+					}),
+					[
+						this.$t(isThoughtIncomplete
+							? 'home.intro.message.incompleteThought'
+							: 'home.intro.message.completeThought', { thought: this.thought.text }
+						),
+						this.$t('home.intro.message.siteInfo')
+					].join(' '),
+					this.$t('home.intro.message.warning') + '`'
+				].join('\n\n');
 			}
 		},
 		watch: {
-			gender(newValue) {
+			async intro(newValue) {
 				if (!newValue) return;
 
-				const concordance = this.gender.toLowerCase() === 'male' ? 'o' : 'a';
-				const isIncompleteSentence = thought.slice(-1) !== '.';
-				const textBl = `\`Ciao ${this.name}, benvenut${concordance} nel mio portfolio personale!
+				await this.$nextTick();
 
-${thought}${isIncompleteSentence ?
-						', ma qualora volessi dare un\'occhiata,'
-						: ' Comunque, aggiungo solo che'} alla pagina 'progetti' trovi i collegamenti ai siti dimostrativi più recenti che ho realizzato, mentre ad 'info' il mio percorso e i miei contatti.
-
-Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inatteso, puoi farmelo sapere alla mia mail.\``;
-				const bl = this.$refs.codeBl;
-				bl.innerHTML = textBl;
-				console.log('Start typewriter...');
-				typewriter.createWithProcessing(bl);
+				typewriter.createWithProcessing(this.$refs.codeBl);
 			}
 		}
 	}
 </script>
 
 <template>
-	<h1 class="text-center py-5">Introduzione</h1>
+	<h1 class="text-center py-5">{{ $t('home.intro.title') }}</h1>
 
 	<div class="code-wrapper">
 		<pre class="cod-ex-block">
-<code ref="codeBl" class="language-javascript typewriter"></code>
+<code ref="codeBl" class="language-javascript typewriter">{{ intro }}</code>
 			</pre>
 
 		<Transition name="bounce">
@@ -82,8 +119,8 @@ Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inat
 				<div class="form-floating">
 					<input id="name" class="form-control" v-model.trim="name" placeholder="inserisci nome" type="text"
 						@keypress.enter="handleConfirm">
-					<label for="name">Nome</label>
-					<div class="form-text">Iserisci il tuo nome e avvia l'introduzione con 'invio'</div>
+					<label for="name">{{ $t('home.intro.input.floatingLabel') }}</label>
+					<div class="form-text">{{ $t('home.intro.input.usageMessage') }}</div>
 				</div>
 			</div>
 		</Transition>

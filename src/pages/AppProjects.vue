@@ -78,12 +78,13 @@
 	</div>
 	<!-- Main -->
 	<main class="pb-4" v-else>
-		<h1 class="text-center py-5">Progetti</h1>
+		<h1 class="text-center py-5">{{ $t('projectsOverview.title') }}</h1>
 		<div class="card-container container-md">
 			<!-- Contatori di card -->
 			<div class="filter-counter-box row d-block p-4">
-				<div>Completed projects: <span class="badge rounded-pill text-bg-dark"><span class="pillow-text">{{
-					projectsList.length }}</span></span></div> <!-- counter for projects -->
+				<div>{{ $t('projectsOverview.projectsInfoBox.completedInfo') }}: <span
+						class="badge rounded-pill text-bg-dark"><span class="pillow-text">{{
+							projectsList.length }}</span></span></div> <!-- counter for projects -->
 			</div>
 			<!-- Row di cols -->
 			<div class="row g-3 mt-5">

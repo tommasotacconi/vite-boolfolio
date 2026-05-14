@@ -1,0 +1,192 @@
+{
+  "components": {
+    "header": {
+      "nav": {
+        "links": {
+          "siteName": "Portfolio",
+          "homepage": "Introduction",
+          "projectsPage": "Projects",
+          "aboutPage": "About"
+        }
+      }
+    },
+    "footer": {},
+    "card": {
+      "shrinked": {
+        "authorsDetail": "Authors"
+      }
+    }
+  },
+
+  "elements": {
+    "buttons": {
+      "showBtn": {
+        "text": "show"
+      }
+    },
+
+    "selects": {
+      "langSel": {
+        "selected": "Change language",
+        "options": ["english", "italian"]
+      }
+    }
+  },
+
+  "home": {
+    "intro": {
+      "title": "Introduction",
+
+      "input": {
+        "floatingLabel": "Name",
+        "usageMessage": "Enter your name and start the introduction by pressing 'enter'"
+      },
+
+      "message": {
+        "greeting": "Hi {name}, {welcome} to my personal portfolio!",
+
+				"thoughts": {
+					"5-9": {
+						"name": "earlyMorning",
+						"sentences": [
+							"The day is just beginning.",
+							"A new day is waiting ahead."
+						]
+					},
+
+					"9-12": {
+						"name": "morning",
+						"sentences": [
+							"You probably have something important coming up.",
+							"The day will be long and full of challenges."
+						]
+					},
+
+					"12-14": {
+						"name": "midday",
+						"sentences": [
+							"It's lunchtime.",
+							"Maybe you're rushing to grab lunch."
+						]
+					},
+
+					"14-15": {
+						"name": "earlyAfternoon",
+						"sentences": [
+							"The afternoon is starting.",
+							"This is usually the sleepy part of the day.",
+							"You might be organizing the rest of your afternoon."
+						]
+					},
+
+					"15-19": {
+						"name": "afternoon",
+						"sentences": [
+							"Maybe you could use a short break.",
+							"I think a short walk could help this afternoon.",
+							"Feel free to grab something to eat if you're getting hungry."
+						]
+					},
+
+					"19-22": {
+						"name": "evening",
+						"sentences": [
+							"There is still time to pursue a daily goal.",
+							"Maybe you still have a few things left to do.",
+							"Take some time for yourself.",
+							"I hope you can make good use of what you learned today; the experiences we go through help us understand who we are."
+						]
+					},
+
+					"22-2": {
+						"name": "night",
+						"sentences": [
+							"I hope you have a good night.",
+							"Only a little energy is still keeping you awake."
+						]
+					},
+
+					"2-5": {
+						"name": "lateNight",
+						"sentences": [
+							"It's deep into the night now.",
+							"You should probably get some rest.",
+							"It's incredibly quiet at this hour."
+						]
+					}
+				},
+
+        "incompleteThought": "{thought}, but if you would like to take a look,",
+
+        "completeThought": "{thought} Anyway, I would also like to mention that",
+
+        "siteInfo": "inside the 'projects' page you can find the most recent demo websites I have developed, while in the 'about' section you can learn more about my background and contacts.",
+
+        "warning": "Oh, almost forgot! The website is still under testing, so if you notice any unexpected behavior feel free to let me know by email."
+      }
+    },
+
+    "footer": "View Projects"
+  },
+
+  "projectsOverview": {
+    "title": "Projects",
+
+    "projectsInfoBox": {
+      "completedInfo": "Completed projects"
+    }
+  },
+
+  "projectShow": {
+    "characteristics": {
+      "authorsInfo": {
+        "title": "Authors"
+      },
+
+      "typeInfo": {
+        "title": "Type"
+      },
+
+      "purposeInfo": {
+        "title": "Purpose"
+      },
+
+      "startInfo": {
+        "title": "Start date"
+      },
+
+      "endInfo": {
+        "title": "End date"
+      },
+
+      "techInfo": {
+        "title": "Technologies",
+
+        "emptyWarning": "No associated technologies specified"
+      }
+    }
+  },
+
+  "about": {
+    "title": "About",
+
+    "cvPar": {
+      "text": "You can find my CV at this",
+      "linkWord": "link"
+    },
+
+    "skills": {
+      "title": "Languages and technologies"
+    },
+
+    "contacts": {
+      "title": "Contacts",
+
+      "services": {
+        "telegram": "Telegram",
+        "email": "Email",
+        "whatsapp": "WhatsApp"
+      }
+    }
+  }
+}

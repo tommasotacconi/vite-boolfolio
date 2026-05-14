@@ -24,12 +24,13 @@
 </script>
 
 <template>
-	<h1>Chi sono</h1>
+	<h1>{{ $t('about.title') }}</h1>
 
-	<p>Trovi il mio cv a questo <a href="../../public/cv/cv_Tommaso_Tacconi.pdf" target="_blank">link.</a>
+	<p>{{ $t('about.cvPar.text') }} <a href="../../public/cv/cv_Tommaso_Tacconi.pdf" target="_blank">{{
+		$t('about.cvPar.linkWord') }}.</a>
 	</p>
 
-	<h2>Contatti</h2>
+	<h2>{{ $t('about.contacts.title') }}</h2>
 
 	<ul>
 		<li v-for="[service, { hrefBase, address }] of Object.entries(contacts)">

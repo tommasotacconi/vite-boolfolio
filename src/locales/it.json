@@ -1,0 +1,144 @@
+{
+	"components": {
+		"header": {
+			"nav": {
+				"links": {
+					"siteName": "Portfolio",
+					"homepage": "Introduzione",
+					"projectsPage": "Progetti",
+					"aboutPage": "Chi sono"
+				}
+			}
+		},
+		"footer": {},
+		"card": {
+			"shrinked": {
+				"authorsDetail": "Autori"
+			}
+		}
+	},
+	"elements": {
+		"buttons": {
+			"showBtn": {
+				"text": "mostra"
+			} 
+		},
+		"selects": {
+			"langSel": {
+				"selected": "Cambia lingua",
+				"options": ["english", "italiano"]
+			}
+		}
+	},
+  "home": {
+    "intro": {
+      "title": "Introduzione",
+			"input": {
+				"floatingLabel": "Nome",
+				"usageMessage": "Inserisci il tuo nome e avvia l'introduzione con 'invio'"
+			},
+      "message": {
+				"greeting": "Ciao {name}, {welcome} nel mio portfolio personale!",
+				"_comment": "Thoughts per time intervals",
+				"thoughts": {
+					"5-9": {
+						"name": "mattinoPresto",
+						"sentences": ["Sta iniziando la giornata.", "Un nuovo giorno attende"]
+					},
+					"9-12": {
+						"name": "mattino",
+						"sentences": ["Probabilmente avrai qualche impegno imminente", "La giornata sarà lunga e avrai delle sfide da affrontare"]
+					},
+					"12-14": {
+						"name": "metàGiornata",
+						"sentences": ["È orario di pranzo.", "Forse starai correndo a pranzo"]
+					},
+					"14-15": {
+						"name": "primoPomeriggio",
+						"sentences": ["Sta iniziando il pomeriggio.", "A quest'ora un po' ci si addormenta", "Starai organizzando il pomeriggio"]
+					},
+					"15-19": {
+						"name": "Pomeriggio",
+						"sentences": [
+							"Magari ti serve una pausa",
+							"Credo che qualche passo ti possa aiutare in questo pomeriggio.",
+							"Mangia pure se ti è venuta un po' fame."
+						]
+					},
+					"19-22": {
+						"name": "sera",
+						"sentences": [
+							"C'è ancora tempo per inseguire un obiettivo quotidiano",
+							"Forse hai ancora qualche impegno da svolgere",
+							"Prenditi del tempo",
+							"Spero che potrai fare buon uso di ciò che hai imparato oggi, le esperienze che facciamo ci aiutano a capire chi siamo."
+						]
+					},
+					"22-2": {
+						"name": "notte",
+						"sentences": ["Spero che tu passa una buona notte.", "Ancora poche energie ti tengono sveglio"]
+					},
+					"2-5": {
+						"name": "notteFonda",
+						"sentences": ["Ora è notte", "Sicuramente ti conviene riposare", "Che silenzio a quest'ora."]
+					}
+				},
+				"incompleteThought": "{thought}, ma qualora volessi dare un'occhiata,",
+				"completeThought": "{thought} Comunque, aggiungo solo che",
+				"siteInfo": "alla pagina 'progetti' trovi i collegamenti ai siti dimostrativi più recenti che ho realizzato, mentre ad 'info' il mio percorso e i miei contatti.",
+				"warning": "Ah dimenticavo! Il sito è in test, quindi se notassi qualche funzionamento inatteso, puoi farmelo sapere alla mia mail."
+    	}
+		},
+		"footer": "View Projects"
+  },
+
+  "projectsOverview": {
+    "title": "Progetti",
+		"projectsInfoBox": {
+			"completedInfo": "Progetti completati"
+		}
+  },
+
+	"projectShow": {
+		"characteristics": {
+			"authorsInfo": {
+				"title": "Autori"
+			},
+			"typeInfo": {
+				"title": "Tipo"
+			},
+			"purposeInfo": {
+				"title": "Scopo"
+			},
+			"startInfo": {
+				"title": "Data d'inizio"
+			},
+			"endInfo": {
+				"title": "Data di fine"
+			},
+			"techInfo": {
+				"title": "Tecnologie",
+				"emptyWarning": "Non sono indicate tecnologie associate"
+			}
+		}
+	},
+
+  "about": {
+    "title": "Chi sono",
+		"cvPar": {
+			"text": "Trovi il mio cv a questo",
+			"linkWord": "collegamento"
+		},
+		"skills": {
+			"title": "Linguaggi e tecnologie"
+		},
+		"contacts": {
+			"title": "Contatti",
+			"services": {
+				"telegram": "Telegram",
+				"email": "Email",
+				"whatsapp": "WhatsApp"
+			}
+		}
+  }
+}

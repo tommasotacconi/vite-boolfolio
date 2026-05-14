@@ -51,28 +51,28 @@
 		<img class="img-fluid" :src="getImagePath(`storage/${project[0].img_url}`)" alt="">
 		<!-- Project characteristics -->
 		<div class="container-md">
-			<h2>Autori</h2>
+			<h2>{{ $t('projectShow.characteristics.authorsInfo.title') }}</h2>
 			<p class="authors">{{ project[0].authors }}</p>
 
-			<h2>Type</h2>
+			<h2>{{ $t('projectShow.characteristics.typeInfo.title') }}</h2>
 			<p class="type">{{ project[0].type.name }}</p>
 
-			<h2>Argomenti</h2>
+			<h2>{{ $t('projectShow.characteristics.purposeInfo.title') }}</h2>
 			<p class="authors">{{ project[0].arguments }}</p>
 
 			<div class="row date-info">
 				<div class="date-wrapper col-4">
-					<h2>Data d'inizio</h2>
+					<h2>{{ $t('projectShow.characteristics.startInfo.title') }}</h2>
 					<p>{{ project[0].start_date }}</p>
 				</div>
 				<div class="date-wrapper col-4">
-					<h2>Data di fine</h2>
+					<h2>{{ $t('projectShow.characteristics.endInfo.title') }}</h2>
 					<p>{{ project[0].end_date }}</p>
 				</div>
 			</div>
 
-			<h2>Technologies</h2>
-			<p v-if="project[0].technologies">Non sono indicate tecnologie associate</p>
+			<h2>{{ $t('projectShow.characteristics.techInfo.title') }}</h2>
+			<p v-if="project[0].technologies">{{ $t('projectShow.characteristics.techInfo.emptyWarning') }}</p>
 			<ul v-else>
 				<li v-for="technology in project[0].technologies">{{ technology.name }}</li>
 			</ul>
