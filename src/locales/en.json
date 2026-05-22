@@ -44,6 +44,7 @@
 
       "message": {
         "greeting": "Hi {name}, {welcome} to my personal portfolio!",
+        "_comment": "Thoughts per time interval",
 
 				"thoughts": {
 					"5-9": {
@@ -170,13 +171,15 @@
   "about": {
     "title": "About",
 
-    "cvPar": {
-      "text": "You can find my CV at this",
-      "linkWord": "link"
+    "skills": {
+      "title": "Languages and technologies",
+      "text": "I know the fundamentals of client-side web development, namely {html}, {css}, and {js}, together with a preprocessor such as {sass} and frameworks/libraries like {bootstrap}, {vue}, and {react}; for the back end I have built products with {node}, {php}, and {laravel}. Regarding data management, I know RDBMSs such as {sql} and {postgresql}."
     },
 
-    "skills": {
-      "title": "Languages and technologies"
+    "personalPath": {
+      "title": "Background",
+      "text": "To learn more about my background, you can view my CV at this {0}.",
+      "linkWord": "link"
     },
 
     "contacts": {

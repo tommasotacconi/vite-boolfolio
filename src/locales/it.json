@@ -125,12 +125,14 @@
 
   "about": {
     "title": "Chi sono",
-		"cvPar": {
-			"text": "Trovi il mio cv a questo",
-			"linkWord": "collegamento"
-		},
 		"skills": {
-			"title": "Linguaggi e tecnologie"
+			"title": "Linguaggi e tecnologie",
+			"text": "Conosco le basi del web lato client, cioè {html}, {css} e {js}, insieme ad un prepocessore quale {sass} e i framework/librerie {bootstrap}, {vue}, {react}; per il back end ho e realizzato prodotti con {node}, {php} e {laravel}. Riguardo alla gestione dei dati conosco i RDMS {sql} and {postgresql}."
+		},
+		"personalPath": {
+			"title": "Percorso",
+			"text": "Per conoscere meglio il mio percorso, puoi vedere il mio cv a questo {0}.",
+			"linkWord": "collegamento"
 		},
 		"contacts": {
 			"title": "Contatti",
