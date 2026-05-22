@@ -1,6 +1,5 @@
 <script>
 	import axios from 'axios';
-	import Card from '../components/Card.vue';
 
 	export default {
 		name: 'AppProjectShow',
@@ -28,9 +27,6 @@
 			getImagePath: function (imgPath) {
 				return new URL(imgPath, 'http://localhost:8000/').href;
 			},
-		},
-		components: {
-			Card,
 		},
 		created() {
 			this.getProjectsList();

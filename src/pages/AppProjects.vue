@@ -1,6 +1,6 @@
 <script>
 	import axios from 'axios';
-	import Card from '../components/Card.vue';
+	import ProjectCard from '../components/ProjectCard.vue';
 
 	export default {
 		name: 'AppMain',
@@ -29,7 +29,7 @@
 			},
 		},
 		components: {
-			Card,
+			ProjectCard,
 		},
 		created() {
 			this.getProjectsList();
@@ -92,7 +92,7 @@
 				<div class="col-2 card-col"
 					:class="{ 'collapsed': collapsedColsIndexes.includes(index) && index !== currentHoveredDivIndex, 'expanded': currentHoveredDivIndex === index }"
 					v-for="(project, index) in projectsList" :key="index">
-					<Card :cardProject="project"
+					<ProjectCard :cardProject="project"
 						:state="{ show: detailsShowsList[index], hovered: index === currentHoveredDivIndex }"
 						@mouseenter="currentHoveredDivIndex = index" @mouseleave="currentHoveredDivIndex = null" />
 				</div>
