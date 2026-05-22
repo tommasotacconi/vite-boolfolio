@@ -1,0 +1,71 @@
+//
+// PRIMARY PALETTE
+//
+
+$primary: #6366f1;
+$secondary: #8b5cf6;
+$accent-blue: #3b82f6;
+
+//
+// TEXT
+//
+
+$text-main: #334155;
+$text-soft: #64748b;
+
+//
+// BACKGROUNDS
+//
+
+$bg-main: #f8fafc;
+$bg-card: #ffffff;
+
+$bg-soft: #eef2ff;
+$bg-violet: #f5f3ff;
+
+//
+// BORDERS
+//
+
+$border-soft: rgba($secondary, .12);
+$border-hover: rgba($primary, .25);
+
+//
+// SHADOWS
+//
+
+$shadow-dark: #0f172a;
+
+$shadow-primary:
+	0 6px 18px rgba($primary, .08);
+
+$shadow-soft:
+	0 2px 6px rgba($shadow-dark, .04);
+
+$shadow-hover:
+	0 12px 28px rgba($primary, .14);
+
+$shadow-hover-soft:
+	0 4px 10px rgba($shadow-dark, .06);
+
+//
+// OVERLAYS
+//
+
+$overlay-primary:
+	linear-gradient(
+		135deg,
+		rgba($primary, .08),
+		rgba($secondary, .06)
+	);
+
+//
+// GRADIENTS
+//
+
+$card-gradient:
+	linear-gradient(
+		145deg,
+		rgba($bg-card, .92),
+		rgba($bg-soft, .88)
+	);
