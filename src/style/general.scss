@@ -1,6 +1,7 @@
 @use 'cursor-animation.css';
 @use 'github-dark-prism.css';
-@use 'bootstrap/scss/bootstrap.scss' as bs;
+@use 'bootstrap/scss/bootstrap' as bs;
+@use '../style/variables/palette' as pall;
 
 // Colors
 $wa-color: #25D366;
@@ -17,4 +18,8 @@ $link-color: #0000EE;
 	100% {
 		transform: scale(1);
 	}
+}
+
+body {
+	background-color: pall.$bg-main;
 }
