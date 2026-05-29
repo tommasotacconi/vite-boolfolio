@@ -1,1 +1,4 @@
-$rot-3d: rotate3d(1, 0.2, -0.3, 67deg);
+$rot-3d-angle: 67deg;
+$rot-axis: 1 0.2 -0.3;
+$rot-3d: $rot-axis $rot-3d-angle;
+$rot-3d-inverse: $rot-axis -$rot-3d-angle;
