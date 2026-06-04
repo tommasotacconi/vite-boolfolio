@@ -1,10 +1,9 @@
 <script>
+	import AppStack from '../components/AppStack.vue';
 	import PersonalLogo from '../components/PersonalLogo.vue';
-	import SkillCard from '../components/SkillCard.vue';
+	import SkillText from '../components/SkillText.vue';
+	import skillsMap from '../js/skillsMap.js';
 
-	function capitalize(str) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
 	const plhol = '<service>'
 	const mesService = `http://${plhol}.me`;
 	const contacts = {
@@ -22,53 +21,13 @@
 		},
 	}
 
-	const skills = [
-		['html', , 'html5'],
-		['css', , 'css3'],
-		['js', 'Javascript'],
-		['bootstrap'],
-		['sass'],
-		['vue', 'Vue.js', 'vuejs',],
-		['react', 'React.js'],
-		['node', 'Node.js'],
-		['php'],
-		['laravel'],
-		['sql', , 'database'],
-		['postgresql']
-	];
-
-	const skillsMap = Object.fromEntries(skills.map(([key, label = capitalize(key), faIcon = key]) =>
-		[key, { label, faIcon }]
-	));
-
 	export default {
 		data() {
 			return {
 				contacts,
-				skillsGroup: {
-					frontend: [
-						'html',
-						'css',
-						'js',
-						'sass',
-						'bootstrap',
-						'vue',
-						'react'
-					],
-					backend: {
-						application: [
-							'node',
-							'php',
-							'laravel'
-						],
-						data: [
-							'sql',
-							'postgresql'
-						]
-					},
-				},
-				skillsMap,
 				hoveredSkill: null,
+				expandedContext: '',
+				skillsMap
 			};
 		},
 		methods: {
@@ -81,21 +40,43 @@
 				}
 
 				return associations[item];
-			}
+			},
+			handleShowCtx(ctx) {
+				this.expandedContext = this.expandedContext === ctx ? null : ctx;
+			},
+			getPlaceholders(text) {
+				return [...text.matchAll(/{(.*?)}/g)].map(match => match[1]);
+			},
+			getPhPerSection(sections) {
+				const result = {};
+
+				for (const [secName, contents] of Object.entries(sections)) {
+					if (secName === 'title') continue;
+
+					if (contents.text) result[secName] = this.getPlaceholders(contents.text);
+					else result[secName] = this.getPhPerSection(contents);
+				}
+
+				return result;
+			},
+			getChildSections(section) {
+				return Object.fromEntries(
+					Object.entries(section).filter(([key]) => !['title', 'text'].includes(key))
+				);
+			},
 		},
 		components: {
 			PersonalLogo,
-			SkillCard
+			AppStack,
+			SkillText
 		},
 		computed: {
-			aboutTxtTemplate() {
-				return this.$i18n.getLocaleMessage(this.$i18n.locale).about.skills.text;
+			msgSkillsSections() {
+				return this.$i18n.getLocaleMessage(this.$i18n.locale).about.skills.sections;
 			},
-			placeholders() {
-				return [...this.aboutTxtTemplate.matchAll(/{(.*?)}/g)].map(match => match[1]);
-			},
-			hoveredCtx() {
-
+			// Placeholders per sections
+			phPerSec() {
+				return this.getPhPerSection(this.msgSkillsSections);
 			}
 		}
 	}
@@ -106,30 +87,38 @@
 	<PersonalLogo />
 
 	<section>
-		<h4 class="mt-2 py-1">{{ $t('about.skills.title') }}</h4>
+		<h2 class="mt-2 py-1">{{ $t('about.skills.title') }}</h2>
 
 		<div class="section-contents d-flex">
 			<div class="section-text">
-				<!-- <p v-html="integratedSkillsText"></p> -->
-				<i18n-t keypath="about.skills.text" tag="p">
-					<template v-for="plhol in placeholders" :key="plhol" #[plhol]>
-						<span :class="['skill']" @mouseenter="hoveredSkill = plhol" @mouseleave="hoveredSkill = null">{{
-							skillsMap[plhol].label }}</span>
-					</template>
-				</i18n-t>
+				<section v-for="(section, ctx) in msgSkillsSections" :key="ctx" :class="[ctx + '-section']">
+					<h3>
+						{{ section.title }}
+						<button :class="['btn', 'btn-info', 'skill-toggle', { active: expandedContext === ctx }]"
+							@click="handleShowCtx(ctx)"><i :class="['fa-solid', `fa-${getFaIcon(ctx)}`]"></i></button>
+					</h3>
+					<SkillText v-if="section.text" :keypath="`about.skills.sections.${ctx}.text`" :text="section.text"
+						:skills-map="skillsMap" @skill-enter="hoveredSkill = $event" @skill-leave="hoveredSkill = null" />
+					<section v-else v-for="(subSection, subCtx) in getChildSections(section)" :key="subCtx"
+						:class="['skill-text-subsection']">
+						<span :class="['skill-text-label', subCtx + '-subctx']">{{ subSection.title }}</span>
+						<SkillText :keypath="`about.skills.sections.${ctx}.${subCtx}.text`" :text="subSection.text"
+							:skills-map="skillsMap" @skill-enter="hoveredSkill = $event" @skill-leave="hoveredSkill = null" />
+					</section>
+				</section>
 			</div>
+
 			<div class="section-illustration d-md-flex flex-wrap">
-				<div :class="['skill-context', ctx]" v-for="(stackOrSubctx, ctx) in skillsGroup">
-					<h3><i :class="['fa-solid', 'fa-' + getFaIcon(ctx)]"></i></h3>
+				<div :class="['skill-context', ctx]" v-for="(stackOrSubctx, ctx) in getPhPerSection(msgSkillsSections)">
+					<h3 :class="{ hovered: expandedContext === ctx }"><i :class="['fa-solid', 'fa-' + getFaIcon(ctx)]"></i></h3>
 					<template v-if="Array.isArray(stackOrSubctx)">
-						<SkillCard v-for="plhol in stackOrSubctx" :key="plhol" :skill="skillsMap[plhol].label"
-							:faIcon="skillsMap[plhol].faIcon" :picked="hoveredSkill === plhol" />
+						<AppStack :stack="stackOrSubctx" :pickedCard="hoveredSkill" :expanded="expandedContext === ctx" />
 					</template>
 					<template v-else>
 						<div :class="['skill-subcontext', subCtx]" v-for="(stack, subCtx) in stackOrSubctx">
 							<h3><i :class="['fa-solid', 'fa-' + getFaIcon(subCtx)]"></i></h3>
-							<SkillCard v-for="plhol in stack" :key="plhol" :skill="skillsMap[plhol].label"
-								:faIcon="skillsMap[plhol].faIcon" :picked="hoveredSkill === plhol" />
+							<AppStack :stack :pickedCard="hoveredSkill" :expanded="expandedContext === ctx"
+								:gridOptions="{ cols: 2 }" />
 						</div>
 					</template>
 				</div>
@@ -137,7 +126,7 @@
 		</div>
 	</section>
 	<section>
-		<h4 class="mt-2 py-1">{{ $t('about.personalPath.title') }}</h4>
+		<h2 class="mt-2 py-1">{{ $t('about.personalPath.title') }}</h2>
 
 		<i18n-t keypath="about.personalPath.text" tag="p">
 			<a href="../../public/cv/cv_Tommaso_Tacconi.pdf" target="_blank">{{
@@ -146,7 +135,7 @@
 		</i18n-t>
 	</section>
 	<section>
-		<h4 class="mt-2 py-1">{{ $t('about.contacts.title') }}</h4>
+		<h2 class="mt-2 py-1">{{ $t('about.contacts.title') }}</h2>
 
 		<ul>
 			<li v-for="[service, { hrefBase, address }] of Object.entries(contacts)">
@@ -167,7 +156,6 @@
 
 	section {
 		margin: 1rem 0;
-		min-height: 220px;
 	}
 
 	h1 {
@@ -175,9 +163,6 @@
 		color: lightsteelblue
 	}
 
-	h4 {
-		font-size: 1.25rem;
-	}
 
 	li {
 		list-style-type: none;
@@ -205,9 +190,64 @@
 		min-height: inherit;
 	}
 
+	%frontend-ctx {
+		color: pall.$frontend;
+	}
+
+	%backend-ctx {
+		color: pall.$backend;
+	}
+
+	%app-subctx {
+		color: pall.$application;
+	}
+
+	%data-subctx {
+		color: pall.$data;
+	}
+
 	.section-text {
 		width: auto;
 		flex: 1 1 50%;
+
+		.frontend-section h3 {
+			@extend %frontend-ctx;
+		}
+
+		.backend-section h3 {
+			@extend %backend-ctx;
+		}
+
+		.skill-toggle {
+			border: 0;
+			color: pall.$text-main;
+			background: pall.$card-gradient;
+			box-shadow: pall.$shadow-soft;
+		}
+
+		.skill-toggle.active {
+			box-shadow:
+				inset 0 0 0 2px pall.$border-hover,
+				pall.$shadow-hover-soft;
+		}
+
+		.skill-text-label {
+			display: inline-flex;
+			margin-bottom: 0.35rem;
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			color: pall.$data;
+
+			&.application-subctx {
+				@extend %app-subctx;
+			}
+
+			&.data-subctx {
+				@extend %data-subctx;
+			}
+		}
 	}
 
 	.section-illustration {
@@ -216,7 +256,7 @@
 
 
 	.skill {
-		color: pall.$secondary;
+		color: pall.$text-soft;
 	}
 
 	.skill-context,
@@ -234,76 +274,70 @@
 
 		position: relative;
 		column-gap: 10px;
-		transform: tran.$rot-3d;
+		rotate: tran.$rot-3d;
 
 		h3 {
-			padding-left: 10px;
-			aspect-ratio: 5 / 4;
-			border: 2px solid pall.$border-soft;
-			border-radius: $br;
+			--shadow-width: 2px;
+			--shadow-color: #{pall.$border-soft};
 
+			padding: {
+				left: 10px;
+				bottom: 5px;
+			}
+
+			aspect-ratio: 5 / 4;
+			border-radius: $br;
 			display: flex;
 			align-items: end;
 
 			font-size: 1.2rem;
 			vertical-align: bottom;
 
-			transition: border-width 0.2s, border-color 0.5s;
+			transition: box-shadow 0.5s;
+			box-shadow: 0 0 0 var(--shadow-width) var(--shadow-color);
+		}
+
+		// Each item: context, width, color, shadow-color
+		$skill-contexts: (
+			(frontend, $card-lg, pall.$frontend, pall.$frontend),
+			(backend, $card-xxl, pall.$backend, pall.$backend)
+		);
+
+	@each $ctx, $width, $color, $shadow-color in $skill-contexts {
+		&.#{$ctx}>h3 {
+			width: $width;
+			@extend %#{$ctx}-ctx;
 
 			&:hover,
 			&.hovered {
-				border-width: 5px;
-			}
-		}
-
-		&.frontend>h3 {
-			width: $card-lg;
-			color: pall.$secondary;
-
-			&:hover,
-			&.hovered {
-				border-color: currentColor;
-			}
-		}
-
-		&.backend>h3 {
-			width: $card-xxl;
-			color: pall.$primary;
-
-			&:hover {
-				border-color: currentColor;
-			}
-		}
-
-		.skill-subcontext {
-			$y-of: 25%;
-			$x-of: 3%;
-
-			width: calc(50% - ($x-of * 2 + $px));
-
-			position: absolute;
-			top: $y-of;
-			bottom: $y-of;
-
-			&.application {
-				left: calc($px + $x-of);
-				color: mix(pall.$secondary, pall.$primary, 40%);
-			}
-
-			&.data {
-				right: calc($px + $x-of);
-				color: pall.$accent-blue;
-
-			}
-
-			& h3 {
-				width: 100%;
-				height: 100%;
-				border: 2px solid pall.$border-soft;
-				border-radius: $br;
-
-				&:hover {}
+				--shadow-width: 6px;
+				--shadow-color: #{$shadow-color};
 			}
 		}
 	}
+
+	.skill-subcontext {
+		$x-of: 3%;
+		width: calc(50% - ($x-of * 2 + $px));
+
+		position: absolute;
+
+		&.application {
+			@extend %app-subctx;
+			left: calc($px + $x-of);
+		}
+
+		&.data {
+			@extend %data-subctx;
+			right: calc($px + $x-of);
+		}
+
+		& h3 {
+			width: 100%;
+			height: 100%;
+			border: 2px solid pall.$border-soft;
+			border-radius: $br;
+		}
+	}
+}
 </style>
