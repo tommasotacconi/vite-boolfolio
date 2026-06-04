@@ -45,8 +45,51 @@
 	</nav>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+	@use '../style/variables/palette' as pall;
+
 	.locale-changer {
 		width: 70px;
+	}
+
+	.navbar-brand {
+		color: pall.$primary;
+	}
+
+	.nav-link {
+		position: relative;
+		width: fit-content;
+		color: pall.$text-soft;
+		transition: color .2s ease;
+
+		&::after {
+			content: '';
+
+			position: absolute;
+			left: var(--bs-nav-link-padding-x);
+			right: var(--bs-nav-link-padding-x);
+			bottom: .25rem;
+
+			height: 2px;
+
+			background-color: pall.$secondary;
+
+			transform: scaleX(0);
+			transform-origin: left;
+		}
+
+		&:hover,
+		&:focus {
+			color: pall.$primary;
+		}
+
+		&.router-link-exact-active {
+			color: pall.$primary;
+
+			&::after {
+				transform: scaleX(1);
+				transition: transform .2s ease;
+			}
+		}
 	}
 </style>

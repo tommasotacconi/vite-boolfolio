@@ -1,10 +1,53 @@
+@use "sass:color";
+
 //
-// PRIMARY PALETTE
+// BRAND PALETTE
 //
 
-$primary: #6366f1;
-$secondary: #8b5cf6;
-$accent-blue: #3b82f6;
+$primary: #334155;
+$secondary: #f59e0b;
+$accent-blue: #0ea5e9;
+
+//
+// CONTEXT PALETTE
+//
+
+$frontend: #2dd4bf;
+$application: #7c3aed;
+$data: #2563eb;
+$backend: color.mix($application, $data, 52%);
+
+//
+// TECHNOLOGY LOGO COLORS
+//
+
+$tech-html: #E34F26;
+$tech-css: #1572B6;
+$tech-js: #F7DF1E;
+$tech-bootstrap: #7952B3;
+$tech-sass: #CC6699;
+$tech-vue: #4FC08D;
+$tech-react: #61DAFB;
+$tech-node: #5FA04E;
+$tech-php: #777BB4;
+$tech-laravel: #FF2D20;
+$tech-sql: #64748b;
+$tech-postgresql: #4169E1;
+
+$tech-logo-colors: (
+	html: $tech-html,
+	css: $tech-css,
+	js: $tech-js,
+	bootstrap: $tech-bootstrap,
+	sass: $tech-sass,
+	vue: $tech-vue,
+	react: $tech-react,
+	node: $tech-node,
+	php: $tech-php,
+	laravel: $tech-laravel,
+	sql: $tech-sql,
+	postgresql: $tech-postgresql
+);
 
 //
 // TEXT
