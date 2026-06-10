@@ -1,17 +1,19 @@
 <script>
-	export default {
-		data() {
-			return {
+	import SiteLogo from './SiteLogo.vue';
 
-			}
-		},
+	export default {
+		components: {
+			SiteLogo
+		}
 	}
 </script>
 
 <template>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Portfolio</a>
+			<router-link :to="{ name: 'home' }" class="navbar-brand" aria-label="Tommaso Tacconi portfolio home">
+				<SiteLogo />
+			</router-link>
 			<div class="d-flex order-lg-1">
 				<label class="d-inline navbar-text me-1" for="lang-select">language</label>
 				<select id="lang-select" class="form-select locale-changer me-4" v-model="$i18n.locale"
@@ -53,6 +55,11 @@
 	}
 
 	.navbar-brand {
+		display: inline-flex;
+		align-items: center;
+		width: 46px;
+		height: 46px;
+		padding: 0;
 		color: pall.$primary;
 	}
 
