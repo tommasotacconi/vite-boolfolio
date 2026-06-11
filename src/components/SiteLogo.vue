@@ -1,18 +1,24 @@
 <script>
 	const siteLogoPaths = {
 		mark: {
-			left: 'M22 62 L50 62 L50 90',
-			right: 'M98 62 L70 62 L70 90'
+			left: 'M22 46 L50 46 L50 74',
+			right: 'M98 46 L70 46 L70 74'
 		},
 		code: {
-			left: 'M35.8 56.2 L16 76 L35.8 95.8',
-			right: 'M84.2 56.2 L104 76 L84.2 95.8'
+			left: 'M35.8 40.2 L16 60 L35.8 79.8',
+			right: 'M84.2 40.2 L104 60 L84.2 79.8'
 		}
 	};
 
 	export default {
+		props: {
+			animated: {
+				type: Boolean,
+				default: true
+			}
+		},
 		data() {
-			const mode = this.$route.name === 'projects' ? 'code' : 'mark';
+			const mode = this.animated && this.$route.name === 'projects' ? 'code' : 'mark';
 
 			return {
 				logoAnimationKey: 0,
@@ -38,6 +44,8 @@
 		},
 		watch: {
 			'$route.name'(routeName) {
+				if (!this.animated) return;
+
 				const nextMode = routeName === 'projects' ? 'code' : 'mark';
 
 				if (nextMode === this.logoTargetMode) return;
@@ -74,8 +82,8 @@
 </script>
 
 <template>
-	<svg :class="['site-logo', `site-logo--${logoMode}`, `site-logo--${logoDirection}`]" viewBox="0 0 120 120"
-		role="img" aria-hidden="true">
+	<svg :class="['site-logo', `site-logo--${logoMode}`, `site-logo--${logoDirection}`]" viewBox="0 0 120 120" role="img"
+		aria-hidden="true">
 		<defs>
 			<linearGradient id="site-logo-gradient" x1="20" y1="20" x2="100" y2="100" gradientUnits="userSpaceOnUse">
 				<stop class="site-logo__gradient-start" offset="0%" stop-color="#2dd4bf" />
@@ -103,7 +111,7 @@
 				:values="logoRightAnimation" />
 		</path>
 
-		<path class="site-logo__stroke site-logo__slash" d="M60 45 V107" />
+		<path class="site-logo__stroke site-logo__slash" d="M60 29 V91" />
 	</svg>
 </template>
 
